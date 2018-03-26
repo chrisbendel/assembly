@@ -8,16 +8,20 @@
 radiusMsg: .asciz "Enter radius: "
 heightMsg: .asciz "Enter height: "
 
+.bss
+.lcomm radius, 8
+.lcomm height, 8
+
 .text
 .globl _asmMain
 _asmMain:
 finit
-fldpi
+
 pushl $radiusMsg
 call _printString
 call _getDouble
 
-call _printDouble
+fsts radius
 
 pushl $heightMsg
 call _printString
