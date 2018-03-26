@@ -1,19 +1,22 @@
-#include <stdio.h>
 #include <iostream>
 
 using namespace std;
 
 extern "C" void asmMain();
 
-extern "C" void test() {
-    cout << "Hello" << endl;
+extern "C" double getDouble() {
+    double d;
+    cin >> d;
+    return d;
 }
 
-extern "C" int getNum() {
-    int num;
-    cout << "Enter a number to add: ";
-    cin >> num;
-    return num;
+extern "C" void printString(char* s) {
+    cout << s;
+    return;
+}
+
+extern "C" void printDouble(double d) {
+    cout << d << endl;
 }
 
 int main() {
