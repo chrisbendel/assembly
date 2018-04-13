@@ -1,79 +1,73 @@
 #Chris Bendel
-#Assignment 8.1
-#Volume of a cylinder
-
-.extern _getDouble
-.extern _printDouble
-.extern _printString
+#Assignment 12
 
 .data
-radiusMsg: .asciz "Enter radius: "
-heightMsg: .asciz "Enter height: "
-resultOutput: .asciz "The radius of the cylinder is: "
-radius: .double 0.0
-radiusSquared: .double 0.0
-height: .double 0.0
-result: .double 0.0
+output:    .ascii "Computer Architecture\n"
+len: .quad (. - output)
+file_name: .asciz "/Users/chris/Desktop/test.txt"
+copy_name: .asciz "/Users/chris/Desktop/testcopy.txt"
+test: .ascii ""
+//copy_len: .quad 1024
+copy_text: .ascii ""
+copy_len: .quad 12
+file_handle: .long 0
+copy_file_handle: .long 0
 
 .text
-.globl _asmMain
-_asmMain:
+.globl _main
+_main:
 
-push %ebp
-movl %esp, %ebp
+//movq $0x2000005, %rax        # system open (5)
+//leaq file_name(%rip), %rdi   # path
+//movq $0x0000, %rsi           # flags (0000=RD_ONLY)
+//movq $0444, %rdx             # mode (permissions)
+//syscall
+//movq %rax, file_handle(%rip)
 
-#Get user input for radius
-pushl $radiusMsg
-call _printString
-add $4, %esp
-call _getDouble
+# Opens file to copy to
+//movq $0x2000005, %rax        # system open (5)
+//leaq file_copy_name(%rip), %rdi   # path
+//movq $0x0201, %rsi           # flags (02=O_CREAT, 01=O_WRONLY)
+//movq $0666, %rdx             # mode (permissions)
+//syscall
+//movq %rax, copy_file_handle(%rip)
 
-#Store the user's input in radius var
-fstpl radius
+# Copy old file to new file
+movq $0x2000227, %rax        # system copyfile (5)
+leaq file_name(%rip), %rdi   # First path
+leaq copy_name(%rip), %rsi   # Second path
+movq $0666, %rdx             # mode (permissions)
+movq $0x0201, %rcx           # flags (02=O_CREAT, 01=O_WRONLY)
+syscall
+//movq %rax, copy_file_handle(%rip)
 
-#Get user input for height
-pushl $heightMsg
-call _printString
-add $4, %esp
-call _getDouble
+//movq $0x2000003, %rax        # system read (3)
+//leaq file_handle(%rip), %rdi   # path
+//movq copy_text(%rip), %rsi
+//movq copy_len(%rip), %rdx
+////movq $0x0201, %rsi           # flags (02=O_CREAT, 01=O_WRONLY)
+////movq $0666, %rdx             # mode (permissions)
+//syscall
+//movq %rax, copy_text(%rip)
 
-#Store the user's input in height var
-fstpl height
+//movq $0x2000004, %rax        # system write (4)
+//movq $1, %rdi                # file handle STDOUT (1)
+//leaq copy_text(%rip), %rsi      # address
+//movq copy_len(%rip), %rdx         # length
+//syscall
+//
+//movq $0x2000004, %rax        # system write (4)
+//movq file_handle(%rip), %rdi # file handle
+//leaq output(%rip), %rsi      # address
+//movq len(%rip), %rdx         # length
+//syscall
 
-#Init FPU
-finit
+//movq $0x2000006, %rax        # system close (6)
+//movq file_handle(%rip), %rdi # file handle
+//syscall
 
-#Radius squared by multiplying radius by itself
-fldl radius
-fldl radius
-fmul %st(1), %st
-fstpl radiusSquared
+movq $0x2000001, %rax        # system exit (1)
+movq $0, %rdi                # return value
+syscall
 
-#pi * radiusSquared
-fldpi
-fldl radiusSquared
-fmul %st(1), %st
-fstpl result
-
-#pi * radiusSquared * height
-fldl result
-fldl height
-fmul %st(1), %st
-fstpl result
-
-#Print a nice string along with the result for the user
-pushl $resultOutput
-call _printString
-add $4, %esp
-
-#Print the result of the calculation
-pushl result + 4
-pushl result
-call _printDouble
-
-#Exit routine
-pushl $0
-subl $4, %esp
-movl $1, %eax
-int $0x80
 .end
