@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		835D8C302045CB82006C2BBB /* main.s in Sources */ = {isa = PBXBuildFile; fileRef = 835D8C2F2045CB82006C2BBB /* main.s */; };
-		835D8C352045CCB3006C2BBB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 835D8C342045CCB3006C2BBB /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,7 +25,6 @@
 /* Begin PBXFileReference section */
 		835D8C252045CB5E006C2BBB /* assembly */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = assembly; sourceTree = BUILT_PRODUCTS_DIR; };
 		835D8C2F2045CB82006C2BBB /* main.s */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = main.s; sourceTree = "<group>"; };
-		835D8C342045CCB3006C2BBB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				835D8C2F2045CB82006C2BBB /* main.s */,
-				835D8C342045CCB3006C2BBB /* main.cpp */,
 			);
 			path = assembly;
 			sourceTree = "<group>";
@@ -122,7 +119,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				835D8C352045CCB3006C2BBB /* main.cpp in Sources */,
 				835D8C302045CB82006C2BBB /* main.s in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,7 +232,7 @@
 		835D8C2D2045CB5E006C2BBB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = J7RDJAL6CR;
 				OTHER_CFLAGS = "-mstackrealign";
@@ -248,7 +244,7 @@
 		835D8C2E2045CB5E006C2BBB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				OTHER_CFLAGS = "-mstackrealign";
